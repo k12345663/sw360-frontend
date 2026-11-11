@@ -110,7 +110,7 @@ const ImportSecondaryDepartmentsSection = (): JSX.Element => {
     ])
 
     const updateFolderPath = async () => {
-        const response = await ApiUtils.POST(`departments/writePathFolder?pathFolder=${folderPath}`, {})
+        const response = await ApiUtils.POST(`departments/writePathFolder?pathFolder=${encodeURIComponent(folderPath)}`, {})
         if (response.status === StatusCodes.UNAUTHORIZED) {
             MessageService.error(t('Session has expired'))
             return dispatchSessionExpiredEvent()
@@ -270,7 +270,7 @@ const ImportSecondaryDepartmentsSection = (): JSX.Element => {
                                             className='form-control'
                                             name='import-folder-path'
                                             placeholder='Enter the directory path folder'
-                                            defaultValue={folderPath}
+                                            value={folderPath}
                                             onChange={changePathFolder}
                                         />
                                     </td>
